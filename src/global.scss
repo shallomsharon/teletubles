@@ -30,6 +30,11 @@ ion-menu ion-list {
     background: var(--light-content) !important;
 }
 
+ion-item {
+    --background: var(--light-content);
+    --border-style: none;
+}
+
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
 

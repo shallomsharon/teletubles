@@ -1,11 +1,41 @@
 #container {
-  text-align: center;
-
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
+  left: 20px;
+  top: 36%;
+  right: 60%;
   transform: translateY(-50%);
+
+  ion-grid {
+    border: 1px solid #8c8c8c53;
+    border-radius: 8px;
+    margin: 16px 20px;
+    color: black;
+
+    ion-col {
+      padding: 8px 12px;
+    }
+  }
+
+  ion-card-title{
+    padding-left: 5px;
+  }
+  ion-card-header {
+    padding-bottom: 0%;
+  }
+
+  h3 {
+    padding-bottom: 10px;
+  }
+}
+
+ion-label.header {
+  padding-top: 1%;
+  padding-left: 1%;
+}
+
+ion-label.grid {
+  display: block;
+  padding: 5px;
 }
 
 #container strong {
@@ -16,9 +46,6 @@
 #container p {
   font-size: 16px;
   line-height: 22px;
-
-  color: #8c8c8c;
-
   margin: 0;
 }
 

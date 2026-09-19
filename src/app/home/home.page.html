@@ -16,8 +16,35 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-item>
+    <ion-label class="header">
+      <h1>Selamat datang, Toko Makmur Jaya! </h1>
+      <p>Berikut ringkasan keuangan bisnis Anda hari ini.</p>
+    </ion-label>
+  </ion-item>
+
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Performa Warung</ion-card-title>
+      </ion-card-header>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <ion-label class="grid">
+              <h3>Total Transaksi</h3>
+              <h1> 120 </h1>
+            </ion-label>
+          </ion-col>
+          <ion-col size="6">
+            <ion-label class="grid">
+              <h3>Produk Terlaris</h3>
+              <h1> Ayam Goreng </h1>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
   </div>
 </ion-content>
