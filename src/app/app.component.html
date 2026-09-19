@@ -1,3 +1,65 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu auto-hide="true" contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menu List</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+      <ion-list lines="none">
+        <ion-menu-toggle>
+          <ion-item routerLink="/home">
+            <ion-icon name="home" slot="start"></ion-icon>
+            <ion-label>Dashboard</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle>
+          <ion-item routerLink="/about">
+            <ion-icon name="list-outline" slot="start"></ion-icon>
+            <ion-label>Produk</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle>
+          <ion-item routerLink="/pasta">
+            <ion-icon name="receipt-outline" slot="start"></ion-icon>
+            <ion-label>Transaksi</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle>
+          <ion-item routerLink="/newpasta" routerDirection="root">
+            <ion-icon name="person-outline" slot="start"></ion-icon>
+            <ion-label>Akun</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+
+  <ion-app>
+    <ion-router-outlet></ion-router-outlet>
+
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="home">
+          <ion-icon name="home"></ion-icon>
+          <ion-label>Pengaturan</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="list">
+          <ion-icon name="help-circle-outline"></ion-icon>
+          <ion-label>About</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="settings">
+          <ion-icon name="log-out-outline"></ion-icon>
+          <ion-label>Logout</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-app>
 </ion-app>

@@ -1,0 +1,22 @@
+ion-item {
+    --background: var(--light-secondary);
+    --color: var(--ion-text-dark);
+
+    margin: 8px 0px;
+    border-radius: 10px;
+
+    ion-label {
+        color: var(--ion-text-dark);
+    }
+
+    ion-icon {
+        color: var(--ion-text-dark);
+    }
+}
+
+ion-item.active {
+    --background: var(--light-secondary);
+    --color: var(--ion-text-dark);
+
+    font-weight: 600;
+}
