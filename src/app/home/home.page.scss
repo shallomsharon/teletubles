@@ -1,24 +1,42 @@
 #container {
   position: absolute;
-  left: 20px;
+  left: 10px;
   top: 36%;
-  right: 60%;
+  right: 15px;
   transform: translateY(-50%);
 
-  ion-grid {
+  ion-grid.inside {
     border: 1px solid #8c8c8c53;
     border-radius: 8px;
     margin: 16px 20px;
     color: black;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     ion-col {
       padding: 8px 12px;
     }
+
+    ion-row {
+      display: flex;
+      align-items: center;
+    }
   }
 
-  ion-card-title{
+  ion-card {
+    height: 100%;
+    margin: 0;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  ion-card-title {
     padding-left: 5px;
   }
+
   ion-card-header {
     padding-bottom: 0%;
   }
@@ -36,6 +54,7 @@ ion-label.header {
 ion-label.grid {
   display: block;
   padding: 5px;
+  padding-bottom: 4px;
 }
 
 #container strong {

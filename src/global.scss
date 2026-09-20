@@ -7,8 +7,17 @@
     --light-content: #f7faf0;
 }
 
+* {
+  font-family: 'Poppins';
+}
+
 ion-toolbar {
-    --background: var(--light-primary);
+    --background: var(--light-secondary);
+    --color: var(--ion-text-dark);
+}
+
+ion-tabs ion-tab-bar {
+    --background: var(--light-secondary);
     --color: var(--ion-text-dark);
 }
 
@@ -22,7 +31,7 @@ ion-menu ion-content {
 }
 
 ion-menu ion-toolbar {
-    --background: var(--light-secondary);
+    --background: var(--light-primary);
     --color: var(--ion-text-dark);
 }
 
