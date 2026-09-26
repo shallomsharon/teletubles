@@ -18,6 +18,10 @@ const routes: Routes = [
     path: 'produkdetail',
     loadChildren: () => import('./produkdetail/produkdetail.module').then( m => m.ProdukdetailPageModule)
   },
+  {
+    path: 'transaksi',
+    loadChildren: () => import('./transaksi/transaksi.module').then( m => m.TransaksiPageModule)
+  },
 
 ];
 
