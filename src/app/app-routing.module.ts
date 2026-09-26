@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'dashboard',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
     path: '',
@@ -13,22 +13,27 @@ const routes: Routes = [
   },
   {
     path: 'produk',
-    loadChildren: () => import('./produk/produk.module').then( m => m.ProdukPageModule)
+    loadChildren: () => import('./produk/produk.module').then(m => m.ProdukPageModule)
   },
   {
     path: 'produkdetail',
-    loadChildren: () => import('./produkdetail/produkdetail.module').then( m => m.ProdukdetailPageModule)
+    loadChildren: () => import('./produkdetail/produkdetail.module').then(m => m.ProdukdetailPageModule)
   },
   {
     path: 'transaksi',
-    loadChildren: () => import('./transaksi/transaksi.module').then( m => m.TransaksiPageModule)
+    loadChildren: () => import('./transaksi/transaksi.module').then(m => m.TransaksiPageModule)
   },
   {
     path: 'new-produk',
-    loadChildren: () => import('./new-produk/new-produk.module').then( m => m.NewProdukPageModule)
-  },  {
+    loadChildren: () => import('./new-produk/new-produk.module').then(m => m.NewProdukPageModule)
+  },
+  {
     path: 'beli',
-    loadChildren: () => import('./beli/beli.module').then( m => m.BeliPageModule)
+    loadChildren: () => import('./beli/beli.module').then(m => m.BeliPageModule)
+  },
+  {
+    path: 'about',
+    loadChildren: () => import('./about/about.module').then(m => m.AboutPageModule)
   }
 
 ];
