@@ -19,35 +19,35 @@
           <h2><strong>{{ t.transaksiCode }}</strong></h2>
           <p>{{ t.transaksiDate | date:'dd MMM yyyy, HH:mm' }}</p>
         </ion-label>
-        <ion-note slot="end" color="primary">
+        <ion-text slot="end" color="primary">
           <strong>Rp {{ t.totalAmount | number }}</strong>
-        </ion-note>
+        </ion-text>
       </ion-item>
 
       <div class="ion-padding" slot="content">
         <ion-list lines="full">
-          <ion-item-divider>
-            <ion-label>Rincian Pembelian</ion-label>
-          </ion-item-divider>
+          <ion-item color="light" lines="full">
+            <ion-label><strong>Rincian Pembelian</strong></ion-label>
+          </ion-item>
 
           <ion-item *ngFor="let item of t.transaksiItems">
-            <ion-thumbnail slot="start">
-              <img [src]="item.barang.image || 'assets/shape-outside.svg'" />
-            </ion-thumbnail>
+            <img [src]="item.barang.image || 'assets/shape-outside.svg'" slot="start" style="width: 44px; height: 44px; object-fit: cover; border-radius: 6px;" />
+            
             <ion-label>
               <h3><strong>{{ item.barang.name }}</strong></h3>
               <p>{{ item.jumlah }} x Rp {{ item.barang.price | number }}</p>
             </ion-label>
-            <ion-note slot="end" color="dark">
+            
+            <ion-text slot="end" color="dark">
               Rp {{ item.subtotal | number }}
-            </ion-note>
+            </ion-text>
           </ion-item>
 
           <ion-item lines="none">
             <ion-label><strong>Total Belanja</strong></ion-label>
-            <ion-note slot="end" color="success">
+            <ion-text slot="end" color="success">
               <h3><strong>Rp {{ t.totalAmount | number }}</strong></h3>
-            </ion-note>
+            </ion-text>
           </ion-item>
         </ion-list>
       </div>
