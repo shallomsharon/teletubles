@@ -10,7 +10,8 @@ const routes: Routes = [
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full'
-  },  {
+  },
+  {
     path: 'produk',
     loadChildren: () => import('./produk/produk.module').then( m => m.ProdukPageModule)
   },
@@ -22,7 +23,10 @@ const routes: Routes = [
     path: 'transaksi',
     loadChildren: () => import('./transaksi/transaksi.module').then( m => m.TransaksiPageModule)
   },
-
+  {
+    path: 'new-produk',
+    loadChildren: () => import('./new-produk/new-produk.module').then( m => m.NewProdukPageModule)
+  }
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Barang } from '../barang';
 
 @Component({
   selector: 'app-produkdetail',
@@ -8,16 +9,21 @@ import { Router } from '@angular/router';
   standalone: false,
 })
 export class ProdukdetailPage implements OnInit {
-  product: any;
 
-  constructor(private router: Router) {
-    const navigation = this.router.getCurrentNavigation();
-    if (navigation && navigation.extras && navigation.extras.state) {
-      this.product = navigation.extras.state['product'];
-    }
+  constructor(
+    public barangService: Barang,
+    private router: Router
+  ) {}
+
+  ngOnInit() {}
+
+  
+  get product() {
+    return this.barangService.selectedProduct;
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
+    
     if (!this.product) {
       this.router.navigate(['/produk']);
     }

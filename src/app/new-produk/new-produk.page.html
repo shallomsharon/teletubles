@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/pasta"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="product-title">Tambah Produk</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large" class="product-title">Tambah Produk</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Form Input Produk -->
+  <ion-item>
+    <ion-label position="stacked">Nama Produk</ion-label>
+    <ion-input type="text" [(ngModel)]="new_name" placeholder="Masukkan nama produk"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Harga Beli</ion-label>
+    <ion-input type="number" [(ngModel)]="new_hargaBeli" placeholder="0"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Harga Jual</ion-label>
+    <ion-input type="number" [(ngModel)]="new_price" placeholder="0"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Jumlah Stok</ion-label>
+    <ion-input type="number" [(ngModel)]="new_stock" placeholder="0"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">URL Gambar Produk</ion-label>
+    <ion-input type="text" [(ngModel)]="new_image" placeholder="https://link-gambar.com/foto.jpg"></ion-input>
+  </ion-item>
+
+  <!-- Preview Gambar (Menggunakan Class SCSS .product-img) -->
+  <div *ngIf="new_image" style="margin-top: 15px;">
+    <img [src]="new_image" class="product-img" alt="Preview Produk" />
+  </div>
+
+  <!-- Tombol Simpan / Tambah Produk -->
+  <ion-button expand="block" color="success" style="margin-top: 24px;" (click)="submitpasta()">
+    Tambah Produk
+  </ion-button>
+</ion-content>

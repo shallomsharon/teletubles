@@ -24,6 +24,7 @@ export class ProdukPage implements OnInit {
   }
 
   goToDetail(product: any) {
-    this.router.navigate(['/produkdetail'], { state: { product: product } });
+    this.barangService.selectedProduct = product;
+    this.router.navigate(['/produkdetail']);
   }
 }
