@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Daftar Produk
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]="searchTerm" placeholder="Cari nama produk..."></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="dark">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6" *ngFor="let item of filteredProducts">
+        <ion-card color="dark">
+          <img [src]="item.image" [alt]="item.name" class="product-img" />
+          <ion-card-content>
+            <h2 class="product-title" (click)="goToDetail(item)">
+              {{ item.name | uppercase }}
+            </h2>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

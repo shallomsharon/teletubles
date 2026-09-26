@@ -10,7 +10,15 @@ const routes: Routes = [
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full'
+  },  {
+    path: 'produk',
+    loadChildren: () => import('./produk/produk.module').then( m => m.ProdukPageModule)
   },
+  {
+    path: 'produkdetail',
+    loadChildren: () => import('./produkdetail/produkdetail.module').then( m => m.ProdukdetailPageModule)
+  },
+
 ];
 
 @NgModule({
