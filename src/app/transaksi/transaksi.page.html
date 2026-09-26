@@ -1,13 +1,61 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>transaksi</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Transaksi</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]="searchTerm" placeholder="Cari tanggal atau kode..."></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">transaksi</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-accordion-group expand="inset">
+    <ion-accordion *ngFor="let t of filteredTransaksi; let i = index" [value]="'transaksi-' + i">
+      
+      <ion-item slot="header" color="light">
+        <ion-label color="dark">
+          <h2><strong>{{ t.transaksiCode }}</strong></h2>
+          <p>{{ t.transaksiDate | date:'dd MMM yyyy, HH:mm' }}</p>
+        </ion-label>
+        <ion-note slot="end" color="primary">
+          <strong>Rp {{ t.totalAmount | number }}</strong>
+        </ion-note>
+      </ion-item>
+
+      <div class="ion-padding" slot="content">
+        <ion-list lines="full">
+          <ion-item-divider>
+            <ion-label>Rincian Pembelian</ion-label>
+          </ion-item-divider>
+
+          <ion-item *ngFor="let item of t.transaksiItems">
+            <ion-thumbnail slot="start">
+              <img [src]="item.barang.image || 'assets/shape-outside.svg'" />
+            </ion-thumbnail>
+            <ion-label>
+              <h3><strong>{{ item.barang.name }}</strong></h3>
+              <p>{{ item.jumlah }} x Rp {{ item.barang.price | number }}</p>
+            </ion-label>
+            <ion-note slot="end" color="dark">
+              Rp {{ item.subtotal | number }}
+            </ion-note>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label><strong>Total Belanja</strong></ion-label>
+            <ion-note slot="end" color="success">
+              <h3><strong>Rp {{ t.totalAmount | number }}</strong></h3>
+            </ion-note>
+          </ion-item>
+        </ion-list>
+      </div>
+
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <div *ngIf="filteredTransaksi.length === 0" class="ion-text-center ion-padding">
+    <p>Belum ada riwayat transaksi yang cocok.</p>
+  </div>
 </ion-content>
