@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./produkdetail.page.scss'],
   standalone: false,
 })
-export class ProdukDetailPage implements OnInit {
+export class ProdukdetailPage implements OnInit {
   product: any;
 
   constructor(private router: Router) {

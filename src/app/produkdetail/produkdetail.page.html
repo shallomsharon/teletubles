@@ -10,9 +10,9 @@
 <ion-content class="ion-padding">
   <div *ngIf="product" class="detail-container">
     <img [src]="product.image" [alt]="product.name" class="detail-img" />
-    
+
     <h1 class="detail-name">{{ product.name }}</h1>
-    
+
     <ion-list lines="full">
       <ion-item>
         <ion-label>
@@ -20,7 +20,7 @@
           <p>Rp {{ product.price | number:'1.0-0' }}</p>
         </ion-label>
       </ion-item>
-      
+
       <ion-item>
         <ion-label>
           <h3>Jumlah Barang (Stok)</h3>
@@ -28,5 +28,12 @@
         </ion-label>
       </ion-item>
     </ion-list>
+
+    <ion-item>
+      <ion-label>
+        <h3>Harga Beli</h3>
+        <p>Rp {{ product.hargaBeli | number:'1.0-0' }}</p>
+      </ion-label>
+    </ion-item>
   </div>
 </ion-content>
