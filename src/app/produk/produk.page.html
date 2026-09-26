@@ -12,11 +12,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" color="dark">
+<ion-content [fullscreen]="true" color="light">
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-md="6" *ngFor="let item of filteredProducts">
-        <ion-card color="dark">
+        <ion-card color="light">
           <img [src]="item.image" [alt]="item.name" class="product-img" />
           <ion-card-content>
             <h2 class="product-title" (click)="goToDetail(item)">
