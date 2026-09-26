@@ -13,8 +13,9 @@ export class NewProdukPage implements OnInit {
   new_price: number = 0;
   new_stock: number = 0;
   new_hargaBeli: number = 0;
+  new_terjual: number = 0;
   new_image: string = '';
-  new_description: string = '';
+  new_description: string='';
 
   arr_price: number[] = [];
   public alertButtons = ['OK'];
@@ -33,13 +34,14 @@ export class NewProdukPage implements OnInit {
   }
 
   submitpasta() {
-    this.barang.addPasta(
+    this.barang.addProduk(
       this.new_name,
       this.new_price,
       this.new_stock,
       this.new_hargaBeli,
+      this.new_terjual,
       this.new_image,
-      this.new_description
+      this.new_description,
     );
     this.router.navigate(['/produk']);
   }

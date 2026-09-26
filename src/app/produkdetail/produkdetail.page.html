@@ -17,7 +17,7 @@
       <ion-item>
         <ion-label>
           <h3>Harga</h3>
-          <p>Rp {{ product.price | number:'1.0-0' }}</p>
+          <p>Rp {{ product.price }}</p>
         </ion-label>
       </ion-item>
 
@@ -32,7 +32,21 @@
     <ion-item>
       <ion-label>
         <h3>Harga Beli</h3>
-        <p>Rp {{ product.hargaBeli | number:'1.0-0' }}</p>
+        <p>Rp {{ product.hargaBeli }}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h3>Terjual</h3>
+        <p> {{ product.terjual }} item</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h3>Deskripsi</h3>
+        <p>{{ product.description }}</p>
       </ion-label>
     </ion-item>
   </div>
