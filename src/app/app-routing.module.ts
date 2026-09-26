@@ -26,7 +26,11 @@ const routes: Routes = [
   {
     path: 'new-produk',
     loadChildren: () => import('./new-produk/new-produk.module').then( m => m.NewProdukPageModule)
+  },  {
+    path: 'beli',
+    loadChildren: () => import('./beli/beli.module').then( m => m.BeliPageModule)
   }
+
 ];
 
 @NgModule({

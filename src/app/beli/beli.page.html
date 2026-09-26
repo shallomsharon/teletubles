@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/transaksi"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Beli Produk</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" color="light">
+
+  <div *ngFor="let item of cartItems; let i = index" class="cart-item-container">
+
+    <ion-item lines="none" class="product-select">
+      <ion-label position="stacked">Pilih Produk</ion-label>
+      <ion-select [(ngModel)]="item.selectedProduct" (ionChange)="onProductChange(item)" placeholder="Pilih item...">
+
+        <ion-select-option *ngFor="let p of availableProducts" [value]="p">
+          {{ p.name }} (Stok: {{ p.stock }}) - Rp {{ p.price }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <div class="quantity-wrapper" *ngIf="item.selectedProduct">
+      <span class="qty-label">Quantity</span>
+      <div class="quantity-controls">
+        <button class="btn-qty minus" (click)="decreaseQty(item)">-</button>
+        <span class="qty-number">{{ item.quantity }}</span>
+        <button class="btn-qty plus" (click)="increaseQty(item)">+</button>
+      </div>
+    </div>
+
+  </div>
+
+  <ion-button expand="block" fill="outline" color="warning" (click)="tambahProduk()" class="ion-margin-top">
+    <ion-icon name="add" slot="start"></ion-icon>
+    Tambah produk
+  </ion-button>
+
+  <ion-button expand="block" color="success" (click)="konfirmasiTransaksi()" class="ion-margin-top"
+    style="margin-bottom: 30px;">
+    <ion-icon name="checkmark-outline" slot="start"></ion-icon>
+    Konfirmasi Transaksi
+  </ion-button>
+</ion-content>

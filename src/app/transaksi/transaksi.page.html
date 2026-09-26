@@ -13,7 +13,7 @@
 <ion-content [fullscreen]="true">
   <ion-accordion-group expand="inset">
     <ion-accordion *ngFor="let t of filteredTransaksi; let i = index" [value]="'transaksi-' + i">
-      
+
       <ion-item slot="header" color="light">
         <ion-label color="dark">
           <h2><strong>{{ t.transaksiCode }}</strong></h2>
@@ -49,7 +49,10 @@
               <h3><strong>Rp {{ t.totalAmount | number }}</strong></h3>
             </ion-note>
           </ion-item>
+
         </ion-list>
+
+
       </div>
 
     </ion-accordion>
@@ -58,4 +61,12 @@
   <div *ngIf="filteredTransaksi.length === 0" class="ion-text-center ion-padding">
     <p>Belum ada riwayat transaksi yang cocok.</p>
   </div>
+
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-bottom: 20px;">
+    <ion-fab-button routerLink="/beli" color="warning">
+      <ion-icon name="cart"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
