@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/produk"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="product-title">Edit Produk</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large" class="product-title">Edit Produk</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-item>
+    <ion-label position="stacked">Nama Produk</ion-label>
+    <ion-input type="text" [(ngModel)]="edit_name" placeholder="Masukkan nama produk"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Harga Beli</ion-label>
+    <ion-input type="number" [(ngModel)]="edit_hargaBeli" placeholder="0"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Harga Jual</ion-label>
+    <ion-input type="number" [(ngModel)]="edit_price" placeholder="0"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Jumlah Stok</ion-label>
+    <ion-input type="number" [(ngModel)]="edit_stock" placeholder="0"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">URL Gambar Produk</ion-label>
+    <ion-input type="text" [(ngModel)]="edit_image" placeholder="https://link-gambar.com/foto.jpg"></ion-input>
+  </ion-item>
+
+  <div *ngIf="edit_image" style="margin-top: 15px;">
+    <img [src]="edit_image" class="product-img" alt="Preview Produk"
+      style="max-height: 200px; width: 100%; object-fit: cover; border-radius: 8px;" />
+  </div>
+
+  <ion-button expand="block" color="primary" style="margin-top: 24px;" (click)="saveProduct()">
+    Simpan Perubahan
+  </ion-button>
+</ion-content>

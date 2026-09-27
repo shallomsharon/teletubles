@@ -17,15 +17,17 @@ export class ProdukdetailPage implements OnInit {
 
   ngOnInit() {}
 
-  
   get product() {
     return this.barangService.selectedProduct;
   }
 
   ionViewWillEnter() {
-    
     if (!this.product) {
       this.router.navigate(['/produk']);
     }
+  }
+
+  goToEdit() {
+    this.router.navigate(['/editproduk']);
   }
 }

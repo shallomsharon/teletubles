@@ -25,7 +25,7 @@ const routes: Routes = [
   },
   {
     path: 'new-produk',
-    loadChildren: () => import('./new-produk/new-produk.module').then( m => m.NewProdukPageModule)
+    loadChildren: () => import('./new-produk/new-produk.module').then(m => m.NewProdukPageModule)
   },
   {
     path: 'beli',
@@ -34,7 +34,16 @@ const routes: Routes = [
   {
     path: 'about',
     loadChildren: () => import('./about/about.module').then(m => m.AboutPageModule)
+  },
+  {
+    path: 'editproduk',
+    loadChildren: () => import('./editproduk/editproduk.module').then(m => m.EditprodukPageModule)
+  },
+  {
+    path: 'editproduk',
+    loadChildren: () => import('./editproduk/editproduk.module').then(m => m.EditprodukPageModule)
   }
+
 ];
 
 @NgModule({

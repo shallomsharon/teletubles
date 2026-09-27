@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Barang } from '../barang'; 
+import { Barang } from '../barang';
 
 @Component({
   selector: 'app-produk',
@@ -9,11 +9,16 @@ import { Barang } from '../barang';
   standalone: false,
 })
 export class ProdukPage implements OnInit {
+
   searchTerm: string = '';
 
-  constructor(private router: Router, private barangService: Barang) { }
+  constructor(
+    public barangService: Barang,
+    private router: Router
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
+
   get filteredProducts() {
     if (!this.searchTerm) {
       return this.barangService.products;
