@@ -8,6 +8,7 @@ import { Barang } from '../barang';
   styleUrls: ['./editproduk.page.scss'],
   standalone: false,
 })
+
 export class EditprodukPage implements OnInit {
   originalProduct: any = null;
 
@@ -18,25 +19,14 @@ export class EditprodukPage implements OnInit {
   edit_image: string = '';
   edit_description: string = '';
 
-  constructor(private router: Router, private barangService: Barang) {}
+  constructor(private router: Router, private barangService: Barang) { }
 
   ngOnInit() {
     this.loadProductData();
   }
 
   ionViewWillEnter() {
-    this.originalProduct = this.barangService.selectedProduct;
-
-    if (this.originalProduct) {
-      this.edit_name = this.originalProduct.name;
-      this.edit_hargaBeli = this.originalProduct.hargaBeli;
-      this.edit_price = this.originalProduct.price;
-      this.edit_stock = this.originalProduct.stock;
-      this.edit_image = this.originalProduct.image;
-      this.edit_description = this.originalProduct.description || '';
-    } else {
-      this.router.navigate(['/produk']);
-    }
+    this.loadProductData();
   }
 
   private loadProductData() {
@@ -72,8 +62,6 @@ export class EditprodukPage implements OnInit {
 
       this.barangService.products[index] = updatedProduct;
       this.barangService.selectedProduct = updatedProduct;
-      this.barangService.saveProducts();
-
       this.router.navigate(['/produk']);
     }
   }

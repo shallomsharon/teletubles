@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Barang } from '../barang';
+import { TransaksiService } from '../transaksi';
 
 @Component({
   selector: 'app-produkdetail',
@@ -11,11 +12,15 @@ import { Barang } from '../barang';
 export class ProdukdetailPage implements OnInit {
 
   constructor(
-    public barangService: Barang,
+    public barangService: Barang, public transaksiService: TransaksiService,
     private router: Router
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.transaksiService && this.transaksiService.listTransaksi) {
+      this.barangService.updateTerjual(this.transaksiService.listTransaksi);
+    }
+  }
 
   get product() {
     return this.barangService.selectedProduct;

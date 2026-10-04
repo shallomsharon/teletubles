@@ -39,9 +39,8 @@ export class NewProdukPage implements OnInit {
       this.new_price,
       this.new_stock,
       this.new_hargaBeli,
-      this.new_terjual,
       this.new_image,
-      this.new_description,
+      this.new_description
     );
     this.router.navigate(['/produk']);
   }

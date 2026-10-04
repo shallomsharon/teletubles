@@ -16,7 +16,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="4" size-md="2" *ngFor="let item of filteredProducts">
-        <ion-card color="light">
+        <ion-card>
           <img [src]="item.image" [alt]="item.name" class="product-img" />
           <ion-card-content>
             <h2 class="product-title" (click)="goToDetail(item)">
@@ -28,8 +28,7 @@
     </ion-row>
   </ion-grid>
 
-  
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-bottom: 55px;">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button routerLink="/new-produk" color="success">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>

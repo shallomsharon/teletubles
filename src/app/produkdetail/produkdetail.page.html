@@ -9,7 +9,7 @@
 
 <ion-content class="ion-padding">
   <div *ngIf="product" class="detail-container">
-    <img [src]="product.image" [alt]="product.name" class="detail-img" />
+    <img [src]="product.image" [alt]="product.name" class="detail-img" style="width: 200px; height: 200px; object-fit: cover;" />
 
     <h1 class="detail-name">{{ product.name }}</h1>
 

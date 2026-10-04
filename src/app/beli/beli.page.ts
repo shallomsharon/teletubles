@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Barang } from '../barang'; 
-import { TransaksiService, Transaksi, TransaksiItem } from '../transaksi'; 
+import { Barang } from '../barang';
+import { TransaksiService, Transaksi, TransaksiItem } from '../transaksi';
 
 @Component({
   selector: 'app-beli',
@@ -54,7 +54,7 @@ export class BeliPage implements OnInit {
   }
 
   onProductChange(item: any) {
-    item.quantity = 1; 
+    item.quantity = 1;
   }
 
   konfirmasiTransaksi() {
@@ -73,32 +73,30 @@ export class BeliPage implements OnInit {
       const subtotal = product.price * item.quantity;
       totalAmount += subtotal;
 
-      transaksiItems.push({
-        barang: {
-          name: product.name,
-          price: product.price,
-          stock: product.stock - item.quantity,
-          hargaBeli: product.hargaBeli,
-          image: product.image,
-          description: product.description
-        },
-        jumlah: item.quantity,
-        subtotal: subtotal
-      });
+      // 1. Kurangi stok dan tambahkan angka terjual langsung di objek referensi memori
       product.stock -= item.quantity;
       if (product.terjual !== undefined) {
         product.terjual += item.quantity;
       } else {
         product.terjual = item.quantity;
       }
+
+      // 2. Buat objek item transaksi
+      transaksiItems.push({
+        barang: {
+          name: product.name,
+          price: product.price
+        },
+        jumlah: item.quantity,
+        subtotal: subtotal
+      });
     }
 
-    this.barangService.saveProducts();
-
+    // Pembuatan ID & Kode Transaksi
     const now = new Date();
     const dateString = now.getFullYear().toString() +
-                       (now.getMonth() + 1).toString().padStart(2, '0') +
-                       now.getDate().toString().padStart(2, '0');
+      (now.getMonth() + 1).toString().padStart(2, '0') +
+      now.getDate().toString().padStart(2, '0');
     const randomNum = Math.floor(100 + Math.random() * 900); // 3 digit acak
 
     const newTransaksi: Transaksi = {
@@ -108,8 +106,11 @@ export class BeliPage implements OnInit {
       transaksiItems: transaksiItems,
       totalAmount: totalAmount
     };
+
+    // Simpan riwayat transaksi ke transaksiService di memori
     this.transaksiService.tambahTransaksi(newTransaksi);
 
+    // Reset keranjang belanja & navigasi
     this.cartItems = [];
     this.tambahProduk();
     this.router.navigate(['/transaksi']);

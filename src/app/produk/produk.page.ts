@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Barang } from '../barang';
+import { Transaksi, TransaksiService } from '../transaksi';
 
 @Component({
   selector: 'app-produk',
@@ -14,8 +15,9 @@ export class ProdukPage implements OnInit {
 
   constructor(
     public barangService: Barang,
+    public transaksiService: TransaksiService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {}
 
@@ -23,7 +25,7 @@ export class ProdukPage implements OnInit {
     if (!this.searchTerm) {
       return this.barangService.products;
     }
-    return this.barangService.products.filter(p => 
+    return this.barangService.products.filter(p =>
       p.name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }

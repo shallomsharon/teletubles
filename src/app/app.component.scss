@@ -1,5 +1,5 @@
 ion-item {
-    --background: var(--light-secondary);
+    --background: var(--ion-color-secondary);
     --color: var(--ion-text-dark);
 
     margin: 8px 0px;
@@ -15,7 +15,7 @@ ion-item {
 }
 
 ion-item.active {
-    --background: var(--light-secondary);
+    --background: var(--ion-color-secondary);
     --color: var(--ion-text-dark);
 
     font-weight: 600;

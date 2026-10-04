@@ -2,9 +2,9 @@
     --ion-text-dark: #315622;
     --ion-text-light: #66805A;
 
-    --light-primary: #faf2d1;
-    --light-secondary: #e3f2c1;
-    --light-content: #f7faf0;
+    --ion-color-primary: #faf2d1;
+    --ion-color-secondary: #e3f2c1;
+    --ion-color-light: #f7faf0;
 }
 
 * {
@@ -12,35 +12,36 @@
 }
 
 ion-toolbar {
-    --background: var(--light-secondary);
+    --background: var(--ion-color-secondary);
     --color: var(--ion-text-dark);
 }
 
 ion-tabs ion-tab-bar {
-    --background: var(--light-secondary);
+    --background: var(--ion-color-secondary);
     --color: var(--ion-text-dark);
+    --color-selected: #ac8e49;
 }
 
 ion-content {
-    --background: var(--light-content);
+    --background: var(--ion-color-light);
     --color: var(--ion-text-dark);
 }
 
 ion-menu ion-content {
-    --background: var(--light-content) !important;
+    --background: var(--ion-color-light) !important;
 }
 
 ion-menu ion-toolbar {
-    --background: var(--light-primary);
+    --background: var(--ion-color-primary);
     --color: var(--ion-text-dark);
 }
 
 ion-menu ion-list {
-    background: var(--light-content) !important;
+    background: var(--ion-color-light) !important;
 }
 
 ion-item {
-    --background: var(--light-content);
+    --background: var(--ion-color-light);
     --border-style: none;
 }
 

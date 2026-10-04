@@ -31,7 +31,7 @@
           </ion-item>
 
           <ion-item *ngFor="let item of t.transaksiItems">
-            <img [src]="item.barang.image || 'assets/shape-outside.svg'" slot="start" style="width: 44px; height: 44px; object-fit: cover; border-radius: 6px;" />
+            <img [src]="getImage(item.barang.name)" slot="start" style="width: 44px; height: 44px; object-fit: cover; border-radius: 6px;" />
             
             <ion-label>
               <h3><strong>{{ item.barang.name }}</strong></h3>
@@ -51,8 +51,6 @@
           </ion-item>
 
         </ion-list>
-
-
       </div>
 
     </ion-accordion>
@@ -61,8 +59,6 @@
   <div *ngIf="filteredTransaksi.length === 0" class="ion-text-center ion-padding">
     <p>Belum ada riwayat transaksi yang cocok.</p>
   </div>
-
-
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-bottom: 20px;">
     <ion-fab-button routerLink="/beli" color="warning">

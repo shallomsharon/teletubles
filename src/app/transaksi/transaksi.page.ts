@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Transaksi, TransaksiService } from '../transaksi';
+import { Barang } from '../barang';
 
 @Component({
   selector: 'app-transaksi',
@@ -12,7 +13,7 @@ export class TransaksiPage implements OnInit {
   searchTerm: string = '';
   transaksiList: Transaksi[] = [];
 
-  constructor(private transaksiService: TransaksiService) { }
+  constructor(public transaksiService: TransaksiService, public barangService: Barang) { }
 
   ngOnInit() {
     this.loadTransactions();
@@ -31,10 +32,17 @@ export class TransaksiPage implements OnInit {
       return this.transaksiList;
     }
     const term = this.searchTerm.toLowerCase();
-    return this.transaksiList.filter(t => 
+    return this.transaksiList.filter(t =>
       t.transaksiCode.toLowerCase().includes(term) ||
       new Date(t.transaksiDate).toLocaleDateString().toLowerCase().includes(term)
     );
+  }
+
+  getImage(productName: string): string {
+    const foundProduct = this.barangService.products.find(
+      p => p.name === productName
+    );
+    return foundProduct ? foundProduct.image : 'assets/shape-outside.svg';
   }
 
 }
