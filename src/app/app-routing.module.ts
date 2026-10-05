@@ -16,7 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('./produk/produk.module').then(m => m.ProdukPageModule)
   },
   {
-    path: 'produkdetail',
+    path: 'produkdetail/:index',
     loadChildren: () => import('./produkdetail/produkdetail.module').then(m => m.ProdukdetailPageModule)
   },
   {
@@ -36,13 +36,14 @@ const routes: Routes = [
     loadChildren: () => import('./about/about.module').then(m => m.AboutPageModule)
   },
   {
-    path: 'editproduk',
+    path: 'editproduk/:index',
     loadChildren: () => import('./editproduk/editproduk.module').then(m => m.EditprodukPageModule)
   },
   {
-    path: 'editproduk',
-    loadChildren: () => import('./editproduk/editproduk.module').then(m => m.EditprodukPageModule)
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
   }
+
 
 ];
 

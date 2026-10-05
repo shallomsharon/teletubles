@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Barang } from '../barang';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Barang } from '../barang';
 
 @Component({
   selector: 'app-new-produk',
@@ -8,23 +9,29 @@ import { Router } from '@angular/router';
   styleUrls: ['./new-produk.page.scss'],
   standalone: false,
 })
+
 export class NewProdukPage implements OnInit {
-  new_name: string = '';
-  new_price: number = 0;
-  new_stock: number = 0;
-  new_hargaBeli: number = 0;
-  new_terjual: number = 0;
-  new_image: string = '';
-  new_description: string='';
+  addForm!: FormGroup;
 
   arr_price: number[] = [];
   public alertButtons = ['OK'];
   constructor(
     private barang: Barang,
     private router: Router,
-  ) {}
+    private fb: FormBuilder
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.addForm = this.fb.group({
+      name: ['', Validators.required],
+      description: [''],
+      hargaBeli: [0, [Validators.required, Validators.min(1)]],
+      price: [0, [Validators.required, Validators.min(1)]],
+      stock: [0, [Validators.required, Validators.min(0)]],
+      image: ['']
+    });
+  }
+
   generateNumberOptions(start: number, end: number, step: number): number[] {
     const options: number[] = [];
     for (let i = start; i <= end; i += step) {
@@ -33,15 +40,22 @@ export class NewProdukPage implements OnInit {
     return options;
   }
 
-  submitpasta() {
+  add() {
+    if (this.addForm.invalid) {
+      this.addForm.markAllAsTouched();
+      return;
+    }
+
+    const formValue = this.addForm.value;
     this.barang.addProduk(
-      this.new_name,
-      this.new_price,
-      this.new_stock,
-      this.new_hargaBeli,
-      this.new_image,
-      this.new_description
+      formValue.name,
+      Number(formValue.price),
+      Number(formValue.stock),
+      Number(formValue.hargaBeli),
+      formValue.image,
+      formValue.description
     );
+
     this.router.navigate(['/produk']);
   }
 }

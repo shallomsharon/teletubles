@@ -15,11 +15,11 @@
 <ion-content [fullscreen]="true" color="light">
   <ion-grid>
     <ion-row>
-      <ion-col size="4" size-md="2" *ngFor="let item of filteredProducts">
+      <ion-col size="4" size-md="2" *ngFor="let item of filteredProducts; let i = index">
         <ion-card>
-          <img [src]="item.image" [alt]="item.name" class="product-img" />
+          <img [src]="item.image || defaultImage" (error)="onImageError($event)" [alt]="item.name || 'Gambar Produk'" class="product-img" />
           <ion-card-content>
-            <h2 class="product-title" (click)="goToDetail(item)">
+            <h2 class="product-title" [routerLink]="['/produkdetail', i]">
               {{ item.name | uppercase }}
             </h2>
           </ion-card-content>
@@ -29,7 +29,7 @@
   </ion-grid>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button routerLink="/new-produk" color="success">
+    <ion-fab-button routerLink="/new-produk">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

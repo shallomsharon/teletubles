@@ -12,6 +12,7 @@ import { Transaksi, TransaksiService } from '../transaksi';
 export class ProdukPage implements OnInit {
 
   searchTerm: string = '';
+  defaultImage: string = 'https://static.thenounproject.com/png/default-image-icon-4595376-512.png';
 
   constructor(
     public barangService: Barang,
@@ -31,7 +32,10 @@ export class ProdukPage implements OnInit {
   }
 
   goToDetail(product: any) {
-    this.barangService.selectedProduct = product;
-    this.router.navigate(['/produkdetail']);
+    this.router.navigate(['/produkdetail', product.id]);
+  }
+
+  onImageError(event: any): void {
+    event.target.src = this.defaultImage;
   }
 }

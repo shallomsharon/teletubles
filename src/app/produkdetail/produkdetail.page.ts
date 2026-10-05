@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Barang } from '../barang';
 import { TransaksiService } from '../transaksi';
 
@@ -11,28 +11,31 @@ import { TransaksiService } from '../transaksi';
 })
 export class ProdukdetailPage implements OnInit {
 
+  defaultImage: string = 'https://static.thenounproject.com/png/default-image-icon-4595376-512.png';
+  index: number = 0;
+  product: any;
+
   constructor(
-    public barangService: Barang, public transaksiService: TransaksiService,
-    private router: Router
+    private barangService: Barang, private transaksiService: TransaksiService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
     if (this.transaksiService && this.transaksiService.listTransaksi) {
       this.barangService.updateTerjual(this.transaksiService.listTransaksi);
     }
-  }
-
-  get product() {
-    return this.barangService.selectedProduct;
-  }
-
-  ionViewWillEnter() {
-    if (!this.product) {
-      this.router.navigate(['/produk']);
-    }
+    
+    this.route.params.subscribe(params => {
+      this.index = params['index'];
+      this.product = this.barangService.products[this.index];
+    });
   }
 
   goToEdit() {
-    this.router.navigate(['/editproduk']);
+    //this.route.navigate(['/editproduk']);
+  }
+
+  onImageError(event: any): void {
+    event.target.src = this.defaultImage;
   }
 }

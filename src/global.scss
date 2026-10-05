@@ -1,3 +1,19 @@
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
 :root {
     --ion-text-dark: #315622;
     --ion-text-light: #66805A;
@@ -8,7 +24,7 @@
 }
 
 * {
-  font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif  ;
 }
 
 ion-toolbar {
@@ -45,21 +61,30 @@ ion-item {
     --border-style: none;
 }
 
-/* Core CSS required for Ionic components to work properly */
-@import "@ionic/angular/css/core.css";
+ion-button {
+    --background: var(--ion-text-light);
+    --color: var(--ion-color-light);
+}
 
-/* Basic CSS for apps built with Ionic */
-@import "@ionic/angular/css/normalize.css";
-@import "@ionic/angular/css/structure.css";
-@import "@ionic/angular/css/typography.css";
-@import "@ionic/angular/css/display.css";
+ion-button:hover {
+    --background: var(--ion-color-primary);
+    --color: var(--ion-text-dark);
+}
 
-/* Optional CSS utils that can be commented out */
-@import "@ionic/angular/css/padding.css";
-@import "@ionic/angular/css/float-elements.css";
-@import "@ionic/angular/css/text-alignment.css";
-@import "@ionic/angular/css/text-transformation.css";
-@import "@ionic/angular/css/flex-utils.css";
+ion-fab-button {
+    --background: var(--ion-text-light);
+    --color: var(--ion-color-light);
+}
+
+ion-searchbar {
+    --background: var(--ion-color-light) !important;
+    --color: var(--ion-color-dark) !important;
+    --placeholder-color: var(--ion-text-light) !important;
+    --icon-color: var(--ion-text-dark) !important;
+    --clear-button-color: var(--ion-text-dark) !important;
+    --border-radius: 8px !important;
+}
+
 
 /**
  * Ionic Dark Mode

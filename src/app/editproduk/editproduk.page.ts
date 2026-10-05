@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Barang } from '../barang';
 
 @Component({
@@ -10,59 +11,63 @@ import { Barang } from '../barang';
 })
 
 export class EditprodukPage implements OnInit {
-  originalProduct: any = null;
+  index: number = 0;
+  editForm!: FormGroup;
 
-  edit_name: string = '';
-  edit_hargaBeli: number = 0;
-  edit_price: number = 0;
-  edit_stock: number = 0;
-  edit_image: string = '';
-  edit_description: string = '';
-
-  constructor(private router: Router, private barangService: Barang) { }
+  constructor(private route: ActivatedRoute, private barangService: Barang,
+    private router: Router, private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.loadProductData();
-  }
+    this.editForm = this.fb.group({
+      name: ['', Validators.required],
+      description: [''],
+      hargaBeli: [0, [Validators.required, Validators.min(1)]],
+      price: [0, [Validators.required, Validators.min(1)]],
+      stock: [0, [Validators.required, Validators.min(0)]],
+      image: ['']
+    });
 
-  ionViewWillEnter() {
-    this.loadProductData();
+    this.route.params.subscribe(params => {
+      this.index = params['index'];
+      this.loadProductData();
+    });
   }
 
   private loadProductData() {
-    this.originalProduct = this.barangService.selectedProduct;
-
-    if (this.originalProduct) {
-      this.edit_name = this.originalProduct.name;
-      this.edit_hargaBeli = this.originalProduct.hargaBeli;
-      this.edit_price = this.originalProduct.price;
-      this.edit_stock = this.originalProduct.stock;
-      this.edit_image = this.originalProduct.image;
-      this.edit_description = this.originalProduct.description || '';
+    const currentProduct = this.barangService.products[this.index];
+    if (currentProduct) {
+      this.editForm.patchValue({
+        name: currentProduct.name,
+        description: currentProduct.description || '',
+        hargaBeli: currentProduct.hargaBeli,
+        price: currentProduct.price,
+        stock: currentProduct.stock,
+        image: currentProduct.image
+      });
     } else {
       this.router.navigate(['/produk']);
     }
   }
 
   saveProduct() {
-    const index = this.barangService.products.findIndex(
-      p => p.name === this.originalProduct.name
-    );
-
-    if (index !== -1) {
-      const updatedProduct = {
-        name: this.edit_name,
-        hargaBeli: Number(this.edit_hargaBeli),
-        price: Number(this.edit_price),
-        stock: Number(this.edit_stock),
-        image: this.edit_image,
-        description: this.edit_description,
-        terjual: this.originalProduct.terjual || 0
-      };
-
-      this.barangService.products[index] = updatedProduct;
-      this.barangService.selectedProduct = updatedProduct;
-      this.router.navigate(['/produk']);
+    if (this.editForm.invalid) {
+      this.editForm.markAllAsTouched();
+      return;
     }
+
+    const currentProduct = this.barangService.products[this.index];
+    const formValue = this.editForm.value;
+
+    this.barangService.products[this.index] = {
+      name: formValue.name,
+      description: formValue.description,
+      hargaBeli: Number(formValue.hargaBeli),
+      price: Number(formValue.price),
+      stock: Number(formValue.stock),
+      image: formValue.image,
+      terjual: currentProduct?.terjual || 0
+    };
+
+    this.router.navigate(['/produkdetail', this.index]);
   }
 }

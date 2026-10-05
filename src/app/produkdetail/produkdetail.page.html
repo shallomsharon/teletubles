@@ -9,7 +9,8 @@
 
 <ion-content class="ion-padding">
   <div *ngIf="product" class="detail-container">
-    <img [src]="product.image" [alt]="product.name" class="detail-img" style="width: 200px; height: 200px; object-fit: cover;" />
+    <img [src]="product?.image || defaultImage" (error)="onImageError($event)" [alt]="product?.name || 'Gambar Produk'" 
+    class="detail-img" style="width: 200px; height: 200px; object-fit: cover;" />
 
     <h1 class="detail-name">{{ product.name }}</h1>
 
@@ -52,7 +53,7 @@
   </div>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="goToEdit()">
+    <ion-fab-button routerLink='/editproduk/{{ index }}'>
       <ion-icon name="create-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>

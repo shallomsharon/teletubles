@@ -10,16 +10,13 @@ import { Barang } from '../barang';
 })
 export class TransaksiPage implements OnInit {
 
+  defaultImage: string = 'https://static.thenounproject.com/png/default-image-icon-4595376-512.png';
   searchTerm: string = '';
   transaksiList: Transaksi[] = [];
 
   constructor(public transaksiService: TransaksiService, public barangService: Barang) { }
 
   ngOnInit() {
-    this.loadTransactions();
-  }
-
-  ionViewWillEnter() {
     this.loadTransactions();
   }
 
@@ -42,7 +39,14 @@ export class TransaksiPage implements OnInit {
     const foundProduct = this.barangService.products.find(
       p => p.name === productName
     );
-    return foundProduct ? foundProduct.image : 'assets/shape-outside.svg';
+
+    if (foundProduct && foundProduct.image && foundProduct.image.trim() !== '') {
+      return foundProduct.image;
+    }
+    return this.defaultImage;
   }
 
+  onImageError(event: any): void {
+    event.target.src = this.defaultImage;
+  }
 }
