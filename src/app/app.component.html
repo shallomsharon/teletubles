@@ -1,4 +1,5 @@
 <ion-app>
+ 
   <ion-menu auto-hide="true" contentId="main-content">
     <ion-header>
       <ion-toolbar>
@@ -41,35 +42,32 @@
 
         <ion-item routerLink="/profile" lines="none">
           <ion-icon name="person-outline" slot="start"></ion-icon>
-          <ion-label>Akun</ion-label> </ion-item
-        >
-
-        
+          <ion-label>Akun</ion-label>
+        </ion-item>
       </ion-list>
     </ion-content>
   </ion-menu>
+
+  
   <ion-router-outlet id="main-content"></ion-router-outlet>
 
-  <ion-app>
-    <ion-router-outlet></ion-router-outlet>
+ 
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="settings" routerLink="/settings">
+        <ion-icon name="settings-outline"></ion-icon>
+        <ion-label>Pengaturan</ion-label>
+      </ion-tab-button>
 
-    <ion-tabs>
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="settings" routerLink="/settings">
-          <ion-icon name="settings-outline"></ion-icon>
-          <ion-label>Pengaturan</ion-label>
-        </ion-tab-button>
+      <ion-tab-button tab="about" routerLink="/about">
+        <ion-icon name="help-circle-outline"></ion-icon>
+        <ion-label>About</ion-label>
+      </ion-tab-button>
 
-        <ion-tab-button tab="about" routerLink="/about">
-          <ion-icon name="help-circle-outline"></ion-icon>
-          <ion-label>About</ion-label>
-        </ion-tab-button>
-
-        <ion-tab-button tab="settings">
-          <ion-icon name="log-out-outline"></ion-icon>
-          <ion-label>Logout</ion-label>
-        </ion-tab-button>
-      </ion-tab-bar>
-    </ion-tabs>
-  </ion-app>
+      <ion-tab-button tab="logout">
+        <ion-icon name="log-out-outline"></ion-icon>
+        <ion-label>Logout</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-app>
