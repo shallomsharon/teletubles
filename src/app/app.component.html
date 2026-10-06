@@ -9,14 +9,24 @@
     <ion-content class="ion-padding">
       <ion-list lines="none">
         <ion-menu-toggle>
-          <ion-item routerLink="/dashboard" routerDirection="root" lines="none" detail="false">
+          <ion-item
+            routerLink="/dashboard"
+            routerDirection="root"
+            lines="none"
+            detail="false"
+          >
             <ion-icon name="home" slot="start"></ion-icon>
             <ion-label>Dashboard</ion-label>
           </ion-item>
         </ion-menu-toggle>
 
         <ion-menu-toggle>
-          <ion-item routerLink="/produk" routerDirection="root" lines="none" detail="false">
+          <ion-item
+            routerLink="/produk"
+            routerDirection="root"
+            lines="none"
+            detail="false"
+          >
             <ion-icon name="list-outline" slot="start"></ion-icon>
             <ion-label>Produk</ion-label>
           </ion-item>
@@ -29,12 +39,12 @@
           </ion-item>
         </ion-menu-toggle>
 
-        <ion-menu-toggle>
-          <ion-item routerLink="/newpasta" routerDirection="root">
-            <ion-icon name="person-outline" slot="start"></ion-icon>
-            <ion-label>Akun</ion-label>
-          </ion-item>
-        </ion-menu-toggle>
+        <ion-item routerLink="/profile" lines="none">
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          <ion-label>Akun</ion-label> </ion-item
+        >
+
+        
       </ion-list>
     </ion-content>
   </ion-menu>
@@ -43,13 +53,13 @@
   <ion-app>
     <ion-router-outlet></ion-router-outlet>
 
-     <ion-tabs>
+    <ion-tabs>
       <ion-tab-bar slot="bottom">
         <ion-tab-button tab="settings" routerLink="/settings">
           <ion-icon name="settings-outline"></ion-icon>
           <ion-label>Pengaturan</ion-label>
         </ion-tab-button>
-        
+
         <ion-tab-button tab="about" routerLink="/about">
           <ion-icon name="help-circle-outline"></ion-icon>
           <ion-label>About</ion-label>
