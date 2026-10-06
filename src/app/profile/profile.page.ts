@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AnimationController } from '@ionic/angular';
 
 @Component({
@@ -8,21 +8,24 @@ import { AnimationController } from '@ionic/angular';
   standalone: false,
 })
 export class ProfilePage implements OnInit {
+  @ViewChild('aboutContent', { read: ElementRef })
+  private pageContent!: ElementRef<HTMLElement>;
+
+  @ViewChild('myProfileCard', { read: ElementRef })
+  private profileCard!: ElementRef<HTMLElement>;
+
   constructor(private animationCtrl: AnimationController) {}
 
   ngOnInit() {}
   ionViewDidEnter() {
     this.animateProfileCard();
+    this.animatePageSlide();
   }
 
   animateProfileCard() {
-    const cardElement = document.querySelector('#myProfileCard');
-    if (!cardElement) return;
-
-   
     const fadeInAnimation = this.animationCtrl
       .create()
-      .addElement(cardElement)
+      .addElement(this.profileCard.nativeElement)
       .duration(1000)
       .iterations(1)
       .keyframes([
@@ -31,5 +34,15 @@ export class ProfilePage implements OnInit {
       ]);
 
     fadeInAnimation.play();
+  }
+  animatePageSlide() {
+    this.animationCtrl
+      .create()
+      .addElement(this.pageContent.nativeElement)
+      .duration(500)
+      .iterations(1)
+      .fromTo('transform', 'translateX(80px)', 'translateX(0px)')
+      .fromTo('opacity', '0', '1')
+      .play();
   }
 }

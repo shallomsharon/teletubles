@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Barang } from '../barang';
 import { TransaksiService } from '../transaksi';
-
+import { AnimationController } from '@ionic/angular';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -10,8 +10,25 @@ import { TransaksiService } from '../transaksi';
 })
 export class HomePage {
 
-  constructor(public barangService: Barang, public transaksiService: TransaksiService) { }
+  constructor(public barangService: Barang, public transaksiService: TransaksiService,private animationCtrl: AnimationController) { }
+  ionViewDidEnter() {
+    this.animatePageSlide();
+  }
 
+  // Fungsi standar untuk animasi slide masuk halaman
+  animatePageSlide() {
+    const contentElement = document.querySelector('#aboutContent');
+    if (!contentElement) return;
+
+    this.animationCtrl
+      .create()
+      .addElement(contentElement)
+      .duration(400)
+      .iterations(1)
+      .fromTo('transform', 'translateX(50px)', 'translateX(0px)')
+      .fromTo('opacity', '0', '1')
+      .play();
+  }
   countTotalProducts(): number {
     return this.barangService.products.length;
   }

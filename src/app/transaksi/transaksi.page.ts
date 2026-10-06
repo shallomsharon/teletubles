@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Transaksi, TransaksiService } from '../transaksi';
 import { Barang } from '../barang';
-
+import { AnimationController } from '@ionic/angular';
 @Component({
   selector: 'app-transaksi',
   templateUrl: './transaksi.page.html',
@@ -10,14 +11,61 @@ import { Barang } from '../barang';
 })
 export class TransaksiPage implements OnInit {
 
+  @ViewChild('aboutContent', { read: ElementRef })
+  private pageContent!: ElementRef<HTMLElement>;
+
+  @ViewChild('cartButton', { read: ElementRef })
+  private cartButton!: ElementRef<HTMLElement>;
+
+  isOpeningBeli = false;
   defaultImage: string = 'https://static.thenounproject.com/png/default-image-icon-4595376-512.png';
   searchTerm: string = '';
   transaksiList: Transaksi[] = [];
 
-  constructor(public transaksiService: TransaksiService, public barangService: Barang) { }
+  constructor(
+    public transaksiService: TransaksiService,
+    public barangService: Barang,
+    private animationCtrl: AnimationController,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.loadTransactions();
+  }
+  ionViewDidEnter() {
+    this.loadTransactions();
+    this.animatePageSlide();
+  }
+
+  
+  animatePageSlide() {
+    this.animationCtrl
+      .create()
+      .addElement(this.pageContent.nativeElement)
+      .duration(500)
+      .iterations(1)
+      .fromTo('transform', 'translateX(80px)', 'translateX(0px)')
+      .fromTo('opacity', '0', '1')
+      .play();
+  }
+
+  async goToBeli(): Promise<void> {
+    if (this.isOpeningBeli) return;
+    this.isOpeningBeli = true;
+
+    await this.animationCtrl
+      .create()
+      .addElement(this.cartButton.nativeElement)
+      .duration(450)
+      .iterations(1)
+      .keyframes([
+        { offset: 0, transform: 'scale(1)' },
+        { offset: 0.6, transform: 'scale(1.45)' },
+        { offset: 1, transform: 'scale(1.15)' },
+      ])
+      .play();
+
+    await this.router.navigate(['/beli']);
   }
 
   loadTransactions() {

@@ -1,10 +1,12 @@
 #container {
-  position: absolute;
-  left: 10px;
-  top: 36%;
-  right: 15px;
-  transform: translateY(-50%);
+  position: relative;
+  width: 100%;
+  margin-top: 16px;
   background: var(--ion-color-light);
+
+  ion-grid {
+    padding: 0;
+  }
 
   ion-grid.inside {
     border: 1px solid #8c8c8c53;
@@ -29,7 +31,6 @@
   ion-card {
     height: 100%;
     margin: 0;
-    margin-left: 10px;
     display: flex;
     flex-direction: column;
   }
