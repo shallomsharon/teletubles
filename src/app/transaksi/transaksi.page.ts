@@ -32,8 +32,8 @@ export class TransaksiPage implements OnInit {
   ngOnInit() {
     this.loadTransactions();
   }
-
   ionViewDidEnter() {
+    this.loadTransactions();
     this.animatePageSlide();
   }
 
