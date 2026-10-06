@@ -1,28 +1,8 @@
-\# My Ionic Task Manager
+SIMOBILE - Aplikasi Kasir Toko Makmur Jaya
 
 
 
-An Ionic Angular mobile app that allows users to create, organize, and track daily tasks with real-time status updates.
-
-
-
-\---
-
-
-
-\## 📋 Daftar Fitur
-
-
-
-Berikut adalah daftar fitur yang berhasil diimplementasikan pada aplikasi ini:
-
-
-
-\- \[x] \*\*Task Management:\*\* Tambah, edit, dan hapus tugas harian.
-
-\- \[x] \*\*Filter Status:\*\* Filter tugas berdasarkan status (Pending, Completed).
-
-\- \[x] \*\*Local Storage:\*\* Menyimpan data tugas di penyimpanan lokal perangkat.
+SIMOBILE adalah aplikasi kasir sederhana untuk HP yang membantu mencatat penjualan, mengecek stok barang, dan melihat laporan keuntungan toko sehari-hari. SIMOBILE bisa dijalankan tanpa memerlukan koneksi internet.
 
 
 
@@ -30,19 +10,50 @@ Berikut adalah daftar fitur yang berhasil diimplementasikan pada aplikasi ini:
 
 
 
-\## ⚙️ Cara Instalasi (Installation)
+Fitur Utama Aplikasi SIMOBILE:
 
 
 
-Pastikan Anda telah menginstal \*\*Node.js (v18+)\*\*, \*\*Git\*\*, dan \*\*Ionic CLI\*\* di komputer Anda sebelum memulai.
+* **Ringkasan Penjualan (Dashboard):** Langsung melihat total penjualan dan produk paling laku hari ini.
+* **Cari Barang Cepat:** Ketik nama barang dan hasilnya langsung muncul seketika.
+* **Cek Stok \& Harga:** Melihat sisa stok, harga beli, serta harga jual barang secara rinci.
+* **Keranjang \& Kasir:** Menghitung total belanjaan pembeli secara otomatis.
+* **Riwayat Transaksi:** Catatan riwayat penjualan yang tersimpan rapi.
+* **Mode Gelap (Dark Mode):** Pilihan tampilan gelap agar nyaman di mata saat digunakan malam hari.
 
 
 
-1\. \*\*Clone repository ini:\*\*
+\---
 
-&#x20;  ```bash
 
-&#x20;  git clone \[https://github.com/shallomsharon/teletubles.git](https://github.com/shallomsharon/teletubles.git)
 
-&#x20;  cd teletubles
+Cara Instalasi (Installation)
+
+
+
+Untuk membuka dan mencoba aplikasi ini di komputer/laptop Anda:
+
+
+
+1. Download / Simpan File
+
+Unduh atau \*clone\* folder aplikasi ini ke komputer Anda:
+
+
+
+git clone https://github.com/shallomsharon/teletubles
+
+
+
+2. Menjalankan Aplikasi
+
+Buka CLI lalu pindah ke directory teletubles sebelum menjalankan perintah berikut:
+
+
+
+cd teletubles
+
+
+
+ionic serve
 
