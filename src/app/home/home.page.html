@@ -3,9 +3,14 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
+
     <ion-title>
       Dashboard
     </ion-title>
+
+    <ion-buttons slot="end" class="ion-padding-end">
+      <ion-toggle [checked]="isDarkMode" (ionChange)="onToggleDarkMode($event)"></ion-toggle>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -57,7 +62,7 @@
             <ion-grid class="inside">
               <ion-row>
                 <ion-col size="12">
-                  <ion-label class="grid" >
+                  <ion-label class="grid">
                     <h1> {{ countTotalProducts() }} </h1>
                   </ion-label>
                 </ion-col>

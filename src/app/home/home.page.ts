@@ -1,21 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Barang } from '../barang';
 import { TransaksiService } from '../transaksi';
 import { AnimationController } from '@ionic/angular';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: false,
 })
-export class HomePage {
+export class HomePage implements OnInit {
+  isDarkMode: boolean = false;
 
-  constructor(public barangService: Barang, public transaksiService: TransaksiService,private animationCtrl: AnimationController) { }
+  constructor(
+    public barangService: Barang,
+    public transaksiService: TransaksiService,
+    private animationCtrl: AnimationController
+  ) { }
+
+  ngOnInit() {
+    const savedTheme = localStorage.getItem('darkMode');
+    this.isDarkMode = savedTheme === 'true';
+    document.body.classList.toggle('dark', this.isDarkMode);
+  }
+
+  onToggleDarkMode(event: any) {
+    this.isDarkMode = event.detail.checked;
+    document.body.classList.toggle('dark', this.isDarkMode);
+    localStorage.setItem('darkMode', this.isDarkMode.toString());
+  }
+
   ionViewDidEnter() {
     this.animatePageSlide();
   }
 
-  // Fungsi standar untuk animasi slide masuk halaman
   animatePageSlide() {
     const contentElement = document.querySelector('#aboutContent');
     if (!contentElement) return;
@@ -29,6 +47,7 @@ export class HomePage {
       .fromTo('opacity', '0', '1')
       .play();
   }
+
   countTotalProducts(): number {
     return this.barangService.products.length;
   }
@@ -49,7 +68,7 @@ export class HomePage {
     const terlaris = this.barangService.getProdukTerlaris(1);
 
     if (terlaris && terlaris.length > 0 && terlaris[0].terjual > 0) {
-      return terlaris[0].name; // Akan mengembalikan 'Teh Pucuk'
+      return terlaris[0].name;
     }
 
     return 'Belum ada';
