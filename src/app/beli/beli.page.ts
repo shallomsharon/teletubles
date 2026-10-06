@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+
 import { Barang } from '../barang';
 import { TransaksiService, Transaksi, TransaksiItem } from '../transaksi';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-beli',
@@ -16,8 +17,8 @@ export class BeliPage implements OnInit {
   constructor(
     private barangService: Barang,
     private transaksiService: TransaksiService,
-    private router: Router
-  ) { }
+    private navCtrl: NavController,
+  ) {}
 
   ngOnInit() {
     this.refreshAvailableProducts();
@@ -29,13 +30,15 @@ export class BeliPage implements OnInit {
   }
 
   refreshAvailableProducts() {
-    this.availableProducts = this.barangService.products.filter(p => p.stock > 0);
+    this.availableProducts = this.barangService.products.filter(
+      (p) => p.stock > 0,
+    );
   }
 
   tambahProduk() {
     this.cartItems.push({
       selectedProduct: null,
-      quantity: 0
+      quantity: 0,
     });
   }
 
@@ -56,9 +59,11 @@ export class BeliPage implements OnInit {
   onProductChange(item: any) {
     item.quantity = 1;
   }
-
+  
   konfirmasiTransaksi() {
-    const validItems = this.cartItems.filter(item => item.selectedProduct != null && item.quantity > 0);
+    const validItems = this.cartItems.filter(
+      (item) => item.selectedProduct != null && item.quantity > 0,
+    );
 
     if (validItems.length === 0) {
       alert('Silakan pilih produk dan tentukan jumlahnya terlebih dahulu.');
@@ -85,16 +90,17 @@ export class BeliPage implements OnInit {
       transaksiItems.push({
         barang: {
           name: product.name,
-          price: product.price
+          price: product.price,
         },
         jumlah: item.quantity,
-        subtotal: subtotal
+        subtotal: subtotal,
       });
     }
 
     // Pembuatan ID & Kode Transaksi
     const now = new Date();
-    const dateString = now.getFullYear().toString() +
+    const dateString =
+      now.getFullYear().toString() +
       (now.getMonth() + 1).toString().padStart(2, '0') +
       now.getDate().toString().padStart(2, '0');
     const randomNum = Math.floor(100 + Math.random() * 900); // 3 digit acak
@@ -104,7 +110,7 @@ export class BeliPage implements OnInit {
       transaksiCode: `TRX-${dateString}-${randomNum}`,
       transaksiDate: now,
       transaksiItems: transaksiItems,
-      totalAmount: totalAmount
+      totalAmount: totalAmount,
     };
 
     // Simpan riwayat transaksi ke transaksiService di memori
@@ -113,6 +119,6 @@ export class BeliPage implements OnInit {
     // Reset keranjang belanja & navigasi
     this.cartItems = [];
     this.tambahProduk();
-    this.router.navigate(['/transaksi']);
+    this.navCtrl.navigateBack('/transaksi');
   }
 }
