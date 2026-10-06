@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
-import { Barang } from '../barang';
-import { TransaksiService, Transaksi, TransaksiItem } from '../transaksi';
 import { NavController } from '@ionic/angular';
+import { KeranjangService } from '../keranjang'; // Adjust import path if needed
 
 @Component({
   selector: 'app-beli',
@@ -11,114 +9,52 @@ import { NavController } from '@ionic/angular';
   standalone: false,
 })
 export class BeliPage implements OnInit {
-  availableProducts: any[] = [];
-  cartItems: any[] = [];
 
   constructor(
-    private barangService: Barang,
-    private transaksiService: TransaksiService,
+    public keranjangService: KeranjangService,
     private navCtrl: NavController,
   ) {}
 
   ngOnInit() {
-    this.refreshAvailableProducts();
-    this.tambahProduk();
+    this.keranjangService.refreshAvailableProducts();
+    if (this.keranjangService.cartItems.length === 0) {
+      this.keranjangService.tambahProduk();
+    }
   }
 
   ionViewWillEnter() {
-    this.refreshAvailableProducts();
+    this.keranjangService.refreshAvailableProducts();
   }
 
-  refreshAvailableProducts() {
-    this.availableProducts = this.barangService.products.filter(
-      (p) => p.stock > 0,
-    );
+  // Getters & Delegates for template compatibility
+  get availableProducts() {
+    return this.keranjangService.availableProducts;
+  }
+
+  get cartItems() {
+    return this.keranjangService.cartItems;
   }
 
   tambahProduk() {
-    this.cartItems.push({
-      selectedProduct: null,
-      quantity: 0,
-    });
+    this.keranjangService.tambahProduk();
   }
 
   increaseQty(item: any) {
-    if (item.selectedProduct) {
-      if (item.quantity < item.selectedProduct.stock) {
-        item.quantity++;
-      }
-    }
+    this.keranjangService.increaseQty(item);
   }
 
   decreaseQty(item: any) {
-    if (item.quantity > 0) {
-      item.quantity--;
-    }
+    this.keranjangService.decreaseQty(item);
   }
 
   onProductChange(item: any) {
-    item.quantity = 1;
+    this.keranjangService.onProductChange(item);
   }
-  
+
   konfirmasiTransaksi() {
-    const validItems = this.cartItems.filter(
-      (item) => item.selectedProduct != null && item.quantity > 0,
-    );
-
-    if (validItems.length === 0) {
-      alert('Silakan pilih produk dan tentukan jumlahnya terlebih dahulu.');
-      return;
+    const isSuccess = this.keranjangService.konfirmasiTransaksi();
+    if (isSuccess) {
+      this.navCtrl.navigateBack('/transaksi');
     }
-
-    let totalAmount = 0;
-    const transaksiItems: TransaksiItem[] = [];
-
-    for (const item of validItems) {
-      const product = item.selectedProduct;
-      const subtotal = product.price * item.quantity;
-      totalAmount += subtotal;
-
-      // 1. Kurangi stok dan tambahkan angka terjual langsung di objek referensi memori
-      product.stock -= item.quantity;
-      if (product.terjual !== undefined) {
-        product.terjual += item.quantity;
-      } else {
-        product.terjual = item.quantity;
-      }
-
-      // 2. Buat objek item transaksi
-      transaksiItems.push({
-        barang: {
-          name: product.name,
-          price: product.price,
-        },
-        jumlah: item.quantity,
-        subtotal: subtotal,
-      });
-    }
-
-    // Pembuatan ID & Kode Transaksi
-    const now = new Date();
-    const dateString =
-      now.getFullYear().toString() +
-      (now.getMonth() + 1).toString().padStart(2, '0') +
-      now.getDate().toString().padStart(2, '0');
-    const randomNum = Math.floor(100 + Math.random() * 900); // 3 digit acak
-
-    const newTransaksi: Transaksi = {
-      transaksiID: 'TRX' + now.getTime(),
-      transaksiCode: `TRX-${dateString}-${randomNum}`,
-      transaksiDate: now,
-      transaksiItems: transaksiItems,
-      totalAmount: totalAmount,
-    };
-
-    // Simpan riwayat transaksi ke transaksiService di memori
-    this.transaksiService.tambahTransaksi(newTransaksi);
-
-    // Reset keranjang belanja & navigasi
-    this.cartItems = [];
-    this.tambahProduk();
-    this.navCtrl.navigateBack('/transaksi');
   }
 }
