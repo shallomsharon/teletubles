@@ -24,7 +24,7 @@
 }
 
 * {
-    font-family: 'Poppins', sans-serif  ;
+    font-family: 'Poppins', sans-serif;
 }
 
 ion-toolbar {
@@ -85,6 +85,23 @@ ion-searchbar {
     --border-radius: 8px !important;
 }
 
+ion-alert {
+    .alert-button-role-cancel {
+        color: #eb445a !important;
+    }
+
+    .alert-button:not(.alert-button-role-cancel) {
+        color: var(--ion-text-dark) !important;
+    }
+
+    .alert-radio-icon {
+        border-color: var(--ion-text-dark) !important;
+    }
+
+    .alert-radio-inner {
+        background-color: var(--ion-text-dark) !important;
+    }
+}
 
 /**
  * Ionic Dark Mode
@@ -98,37 +115,99 @@ ion-searchbar {
 /* @import "@ionic/angular/css/palettes/dark.system.css"; */
 
 body.dark {
-  --ion-background-color: #000000;
-  --ion-background-color-rgb: 0,0,0;
-  --ion-text-color: #ffffff;
-  --ion-text-color-rgb: 255,255,255;
+    --ion-background-color: #000000;
+    --ion-background-color-rgb: 0, 0, 0;
+    --ion-text-color: #ffffff;
+    --ion-text-color-rgb: 255, 255, 255;
 
-  ion-content, 
-  ion-menu ion-content, 
-  ion-menu ion-list {
-    --background: #000000 !important;
-    background: #000000 !important;
-    --color: #ffffff !important;
-  }
+    ion-content,
+    ion-menu ion-content,
+    ion-menu ion-list {
+        --background: #000000 !important;
+        background: #000000 !important;
+        --color: #ffffff !important;
+    }
 
-  ion-card, ion-item {
-    --background: #121212 !important;
-    background: #121212 !important;
-    --color: #ffffff !important;
-    border: 1px solid #222222;
-  }
+    ion-accordion,
+    ion-accordion ion-item,
+    ion-accordion div {
+        background: #000000 !important;
+        --color: #ffffff !important;
+    }
 
-  h1, h2, h3, h4, h5, h6, p, span, ion-label, div {
-    color: #ffffff !important;
-  }
+    ion-accordion div {
+        background: #262424 !important;
+        --color: #ffffff !important;
+    }
 
-  ion-toolbar, ion-tab-bar {
-    --color: var(--ion-text-dark);
-  }
+    ion-card,
+    ion-item {
+        --background: #121212 !important;
+        background: #121212 !important;
+        --color: #ffffff !important;
+        border: 1px solid #222222;
+    }
 
-  ion-toolbar h1, ion-toolbar h2, ion-toolbar h3, 
-  ion-toolbar ion-title, ion-toolbar ion-label,
-  ion-tab-bar ion-label, ion-tab-bar ion-icon {
-    color: var(--ion-text-dark) !important;
-  }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    span,
+    ion-label,
+    div {
+        color: #ffffff !important;
+    }
+
+    ion-card-title,
+    ion-card-subtitle,
+    ion-card-content {
+        color: var(--ion-color-primary) !important;
+    }
+
+    ion-toolbar,
+    ion-tab-bar {
+        --background: #262424;
+        --color: var(--ion-color-light);
+        --color-selected: var(--ion-color-secondary);
+    }
+
+    ion-toolbar h1,
+    ion-toolbar h2,
+    ion-toolbar h3,
+    ion-toolbar ion-title,
+    ion-toolbar ion-label,
+    ion-tab-bar ion-label,
+    ion-tab-bar ion-icon {
+        color: var(--ion-color-light) !important;
+    }
+
+    ion-item {
+        --background: #121212;
+        --color: var(--ion-color-light);
+
+        margin: 8px 0px;
+        border-radius: 10px;
+
+        ion-label {
+            color: var(--ion-color-light);
+        }
+
+        ion-icon {
+            color: var(--ion-color-secondary) !important;
+        }
+    }
+
+    ion-item.active {
+        --background: var(--ion-color-secondary) !important;
+        --color: var(--ion-text-dark);
+
+        font-weight: 600;
+    }
+
+    div {
+        background: #000000 !important;
+    }
 }

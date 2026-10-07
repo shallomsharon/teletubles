@@ -56,7 +56,7 @@ export class TransaksiService {
     {
       transaksiID: 'TRX004',
       transaksiCode: 'TRX-20260927-002',
-      transaksiDate: new Date('2026-09-27T11:45:00'),
+      transaksiDate: new Date('2026-10-08T11:45:00'),
       totalAmount: 36000,
       transaksiItems: [
         { barang: { name: 'Teh Pucuk', price: 6000 }, jumlah: 4, subtotal: 24000 },
@@ -129,10 +129,21 @@ export class TransaksiService {
   constructor() { }
 
   getRiwayat(): Transaksi[] {
-    return this.listTransaksi;
+    return [...this.listTransaksi].sort((a, b) => {
+      return new Date(b.transaksiDate).getTime() - new Date(a.transaksiDate).getTime();
+    });
   }
 
   tambahTransaksi(transaksi: Transaksi): void {
     this.listTransaksi.unshift(transaksi);
+  }
+
+  getTransaksiHariIni(): number {
+    const today = new Date().toDateString();
+
+    return this.getRiwayat().filter(transaksi => {
+      const tDate = new Date(transaksi.transaksiDate).toDateString();
+      return tDate === today;
+    }).length;
   }
 }

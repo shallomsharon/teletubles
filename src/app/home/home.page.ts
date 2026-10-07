@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Barang } from '../barang';
 import { TransaksiService } from '../transaksi';
 import { AnimationController } from '@ionic/angular';
@@ -15,15 +15,20 @@ export class HomePage implements OnInit {
   constructor(
     public barangService: Barang,
     public transaksiService: TransaksiService,
-    private animationCtrl: AnimationController
+    private animationCtrl: AnimationController,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
-    const savedTheme = localStorage.getItem('darkMode');
-    this.isDarkMode = savedTheme === 'true';
-    document.body.classList.toggle('dark', this.isDarkMode);
+    this.refreshData();
   }
 
+  ionViewWillEnter() {
+    this.refreshData();
+    console.log('Daftar Transaksi Saat Ini:', this.transaksiService.listTransaksi);
+    console.log('Total Transaksi Hari Ini:', this.countTransactions());
+    this.cdr.detectChanges();
+  }
 
   ionViewDidEnter() {
     this.animatePageSlide();
@@ -47,8 +52,8 @@ export class HomePage implements OnInit {
     return this.barangService.products.length;
   }
 
-  countTotalTransactions(): number {
-    return this.transaksiService.getRiwayat().length;
+  countTransactions(): number {
+    return this.transaksiService.getTransaksiHariIni();
   }
 
   refreshData() {
@@ -62,7 +67,7 @@ export class HomePage implements OnInit {
 
     const terlaris = this.barangService.getProdukTerlaris(1);
 
-    if (terlaris && terlaris.length > 0 && terlaris[0].terjual > 0) {
+    if (terlaris && terlaris.length > 0 && (terlaris[0].terjualHariIni || 0) > 0) {
       return terlaris[0].name;
     }
 

@@ -20,9 +20,9 @@
           <h2><strong>{{ t.transaksiCode }}</strong></h2>
           <p>{{ t.transaksiDate | date:'dd MMM yyyy, HH:mm' }}</p>
         </ion-label>
-        <ion-text slot="end">
+        <ion-label slot="end">
           <strong>Rp {{ t.totalAmount | number }}</strong>
-        </ion-text>
+        </ion-label>
       </ion-item>
 
       <div class="ion-padding" slot="content">
@@ -40,16 +40,16 @@
               <p>{{ item.jumlah }} x Rp {{ item.barang.price | number }}</p>
             </ion-label>
 
-            <ion-text slot="end">
+            <ion-label slot="end">
               Rp {{ item.subtotal | number }}
-            </ion-text>
+            </ion-label>
           </ion-item>
 
           <ion-item lines="none">
             <ion-label><strong>Total Belanja</strong></ion-label>
-            <ion-text slot="end">
+            <ion-label slot="end">
               <h3><strong>Rp {{ t.totalAmount | number }}</strong></h3>
-            </ion-text>
+            </ion-label>
           </ion-item>
 
         </ion-list>

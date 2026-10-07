@@ -38,27 +38,58 @@ export class Barang {
     }
 
     updateTerjual(listTransaksi: any[]) {
-        this.products.forEach(p => p.terjual = 0);
+        this.products.forEach(p => {
+            p.terjual = 0;
+            p.terjualHariIni = 0;
+        });
 
         if (!listTransaksi || listTransaksi.length === 0) return;
 
-        // 2. Iterasi setiap transaksi dan setiap item di dalamnya
+        const today = new Date().toDateString();
+
+        // 2. Iterasi setiap transaksi
         for (const trx of listTransaksi) {
+            // Cek apakah transaksi terjadi hari ini
+            const rawDate = trx?.transaksiDate || trx?.tanggal;
+            const isToday = rawDate && new Date(rawDate).toDateString() === today;
+
             if (trx.transaksiItems && Array.isArray(trx.transaksiItems)) {
                 for (const item of trx.transaksiItems) {
                     // Cari produk berdasarkan nama
-                    const product = this.products.find(p => p.name === item.barang.name);
+                    const product = this.products.find(p => p.name === item.barang?.name);
+
                     if (product) {
-                        product.terjual = (product.terjual || 0) + Number(item.jumlah);
+                        const qty = Number(item.jumlah) || 0;
+
+                        // Akumulasi total terjual (keseluruhan)
+                        product.terjual = (product.terjual || 0) + qty;
+
+                        // Akumulasi terjual khusus HARI INI
+                        if (isToday) {
+                            product.terjualHariIni = (product.terjualHariIni || 0) + qty;
+                        }
                     }
                 }
             }
         }
     }
 
-    getProdukTerlaris(limit: number = 3) {
+    private isHariIni(dateInput: Date | string): boolean {
+        const d = new Date(dateInput);
+        const today = new Date();
+        return (
+            d.getDate() === today.getDate() &&
+            d.getMonth() === today.getMonth() &&
+            d.getFullYear() === today.getFullYear()
+        );
+    }
+
+    getProdukTerlaris(limit: number = 1) {
         return [...this.products]
-            .sort((a, b) => (b.terjual || 0) - (a.terjual || 0))
+            // Filter produk yang ada penjualan hari ini
+            .filter(p => (p.terjualHariIni || 0) > 0)
+            // Urutkan dari yang paling banyak terjual hari ini
+            .sort((a, b) => (b.terjualHariIni || 0) - (a.terjualHariIni || 0))
             .slice(0, limit);
     }
 }

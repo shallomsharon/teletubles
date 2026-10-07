@@ -34,9 +34,7 @@ export class TransaksiPage implements OnInit {
   ngOnInit() {}
 
   ionViewWillEnter() {
-    
     this.cdr.detectChanges();
-
   }
 
   ionViewDidEnter() {
@@ -85,7 +83,7 @@ export class TransaksiPage implements OnInit {
   }
 
   get filteredTransaksi(): Transaksi[] {
-    const semua = [...this.transaksiService.getRiwayat()].reverse();
+    const semua = [...this.transaksiService.getRiwayat()];
 
 
     if (!this.searchTerm.trim()) {

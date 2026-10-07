@@ -16,31 +16,30 @@
 
   <ion-list inset="true">
     <ion-item>
-      <ion-icon name="moon-outline" slot="start" color="primary"></ion-icon>
+      <ion-icon name="moon-outline" slot="start"></ion-icon>
       <ion-label>Mode Gelap </ion-label>
       <ion-toggle [checked]="isDarkMode" (ionChange)="onToggleDarkMode($event)"></ion-toggle>
 
     </ion-item>
 
     <ion-item>
-      <ion-icon name="notifications-outline" slot="start" color="primary"></ion-icon>
+      <ion-icon name="notifications-outline" slot="start"></ion-icon>
       <ion-label>Notifikasi Transaksi</ion-label>
       <ion-toggle [(ngModel)]="notificationsEnabled"></ion-toggle>
     </ion-item>
 
     <ion-item>
-      <ion-icon name="language-outline" slot="start" color="primary"></ion-icon>
+      <ion-icon name="language-outline" slot="start"></ion-icon>
       <ion-label>Bahasa</ion-label>
       <ion-select [(ngModel)]="selectedLanguage" interface="action-sheet">
         <ion-select-option value="id">Bahasa Indonesia</ion-select-option>
-        <ion-select-option value="en">English</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>
 
   <ion-list inset="true">
     <ion-item lines="none">
-      <ion-icon name="information-circle-outline" slot="start" color="medium"></ion-icon>
+      <ion-icon name="information-circle-outline" slot="start"></ion-icon>
       <ion-label>Versi Aplikasi</ion-label>
       <ion-text slot="end" color="medium">
         <p>v1.0.0</p>
