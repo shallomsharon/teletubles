@@ -1,9 +1,19 @@
 .product-img {
   object-fit: cover;
-  width: 200px; 
+  width: 200px;
   height: 200px;
 }
 
-.product-title { 
+.product-title {
   cursor: pointer;
-}   
+}
+
+ion-label {
+  padding-bottom: 10px;
+}
+
+ion-item {
+  border: 1px solid #8c8c8c53;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
