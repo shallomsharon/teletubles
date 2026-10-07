@@ -16,6 +16,8 @@ export class ProdukPage implements OnInit {
   private pageContent!: ElementRef<HTMLElement>;
 
   searchTerm: string = '';
+  selectedCategory: string = ''; 
+  sortPrice: string = '';       
   defaultImage: string = 'https://static.thenounproject.com/png/default-image-icon-4595376-512.png';
 
   constructor(
@@ -26,11 +28,11 @@ export class ProdukPage implements OnInit {
   ) { }
 
   ngOnInit() {}
+  
   ionViewDidEnter() {
     this.animatePageSlide();
   }
 
-  
   animatePageSlide() {
     this.animationCtrl
       .create()
@@ -41,14 +43,9 @@ export class ProdukPage implements OnInit {
       .fromTo('opacity', '0', '1')
       .play();
   }
-  get filteredProducts() {
-    if (!this.searchTerm) {
-      return this.barangService.products;
-    }
-    return this.barangService.products.filter(p =>
-      p.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
-  }
+
+  
+  
 
   goToDetail(product: any) {
     this.router.navigate(['/produkdetail', product.id]);
@@ -56,5 +53,33 @@ export class ProdukPage implements OnInit {
 
   onImageError(event: any): void {
     event.target.src = this.defaultImage;
+  }
+  get filteredProducts() {
+    let result = [...this.barangService.products];
+
+
+    if (this.searchTerm && this.searchTerm.trim() !== '') {
+      result = result.filter(p =>
+        p.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    }
+
+    
+    if (this.selectedCategory && this.selectedCategory !== '') {
+      if (this.selectedCategory === 'tersedia') {
+        result = result.filter(p => p.stock > 0); 
+      } else if (this.selectedCategory === 'habis') {
+        result = result.filter(p => p.stock <= 0); 
+      }
+    }
+
+   
+    if (this.sortPrice === 'low-high') {
+      result.sort((a, b) => a.price - b.price);
+    } else if (this.sortPrice === 'high-low') {
+      result.sort((a, b) => b.price - a.price);
+    }
+
+    return result;
   }
 }

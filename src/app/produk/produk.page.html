@@ -3,21 +3,72 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
-      Daftar Produk
-    </ion-title>
+    <ion-title> Daftar Produk </ion-title>
   </ion-toolbar>
+
+  <!-- Bungkus baris filter di dalam ion-toolbar agar rapi di bawah title dan di atas searchbar -->
   <ion-toolbar>
-    <ion-searchbar [(ngModel)]="searchTerm" placeholder="Cari nama produk..."></ion-searchbar>
+    <ion-row class="ion-padding-horizontal ion-align-items-center filter-container">
+      <!-- Filter Stock -->
+      <ion-col size="6">
+        <ion-item lines="none" class="filter-item">
+          <ion-label position="stacked">Stock</ion-label>
+          <ion-select
+            [(ngModel)]="selectedCategory"
+            placeholder="Semua Stock"
+          >
+            <ion-select-option value="">Semua Stock</ion-select-option>
+            <ion-select-option value="tersedia">Tersedia</ion-select-option>
+            <ion-select-option value="habis">Habis</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <!-- Filter / Urutan Harga -->
+      <ion-col size="6">
+        <ion-item lines="none" class="filter-item">
+          <ion-label position="stacked">Urutkan Harga</ion-label>
+          <ion-select
+            [(ngModel)]="sortPrice"
+            placeholder="Default"
+          >
+            <ion-select-option value="">Default</ion-select-option>
+            <ion-select-option value="low-high">Termurah ke Termahal</ion-select-option>
+            <ion-select-option value="high-low">Termahal ke Termurah</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-searchbar
+      [(ngModel)]="searchTerm"
+      placeholder="Cari nama produk..."
+    ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
-<ion-content #aboutContent id="aboutContent" class="ion-padding" [fullscreen]="true">
+<ion-content
+  #aboutContent
+  id="aboutContent"
+  class="ion-padding"
+  [fullscreen]="true"
+>
   <ion-grid>
     <ion-row>
-      <ion-col size="4" size-md="2" *ngFor="let item of filteredProducts; let i = index">
+      <ion-col
+        size="4"
+        size-md="2"
+        *ngFor="let item of filteredProducts; let i = index"
+      >
         <ion-card>
-          <img [src]="item.image || defaultImage" (error)="onImageError($event)" [alt]="item.name || 'Gambar Produk'" class="product-img" />
+          <img
+            [src]="item.image || defaultImage"
+            (error)="onImageError($event)"
+            [alt]="item.name || 'Gambar Produk'"
+            class="product-img"
+          />
           <ion-card-content>
             <h2 class="product-title" [routerLink]="['/produkdetail', i]">
               {{ item.name | uppercase }}
