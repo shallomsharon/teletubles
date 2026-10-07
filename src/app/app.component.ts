@@ -7,5 +7,12 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class AppComponent {
-  constructor() {}
+  constructor() { }
+
+  logout() {
+    const isConfirmed = confirm('Apakah Anda yakin ingin keluar?');
+    if (isConfirmed) {
+      alert('Berhasil keluar dari akun.');
+    }
+  }
 }
