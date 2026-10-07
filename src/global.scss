@@ -210,4 +210,14 @@ body.dark {
     div {
         background: #000000 !important;
     }
+
+    ion-alert {
+        .alert-radio-icon {
+            border-color: var(--ion-color-light) !important;
+        }
+
+        .alert-radio-inner {
+            background-color: var(--ion-color-secondary) !important;
+        }
+    }
 }
