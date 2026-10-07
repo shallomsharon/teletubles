@@ -16,8 +16,8 @@ export class ProdukPage implements OnInit {
   private pageContent!: ElementRef<HTMLElement>;
 
   searchTerm: string = '';
-  selectedCategory: string = ''; 
-  sortPrice: string = '';       
+  selectedCategory: string = '';
+  sortPrice: string = '';
   defaultImage: string = 'https://static.thenounproject.com/png/default-image-icon-4595376-512.png';
 
   constructor(
@@ -27,8 +27,8 @@ export class ProdukPage implements OnInit {
     private animationCtrl: AnimationController
   ) { }
 
-  ngOnInit() {}
-  
+  ngOnInit() { }
+
   ionViewDidEnter() {
     this.animatePageSlide();
   }
@@ -44,8 +44,8 @@ export class ProdukPage implements OnInit {
       .play();
   }
 
-  
-  
+
+
 
   goToDetail(product: any) {
     this.router.navigate(['/produkdetail', product.id]);
@@ -64,16 +64,16 @@ export class ProdukPage implements OnInit {
       );
     }
 
-    
+
     if (this.selectedCategory && this.selectedCategory !== '') {
       if (this.selectedCategory === 'tersedia') {
-        result = result.filter(p => p.stock > 0); 
+        result = result.filter(p => p.stock > 0);
       } else if (this.selectedCategory === 'habis') {
-        result = result.filter(p => p.stock <= 0); 
+        result = result.filter(p => p.stock <= 0);
       }
     }
 
-   
+
     if (this.sortPrice === 'low-high') {
       result.sort((a, b) => a.price - b.price);
     } else if (this.sortPrice === 'high-low') {
@@ -81,5 +81,9 @@ export class ProdukPage implements OnInit {
     }
 
     return result;
+  }
+
+  getProductIndex(item: any): number {
+    return this.barangService.products.indexOf(item);
   }
 }

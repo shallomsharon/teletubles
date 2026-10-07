@@ -6,10 +6,8 @@
     <ion-title> Daftar Produk </ion-title>
   </ion-toolbar>
 
-  <!-- Bungkus baris filter di dalam ion-toolbar agar rapi di bawah title dan di atas searchbar -->
   <ion-toolbar>
     <ion-row class="ion-padding-horizontal ion-align-items-center filter-container">
-      <!-- Filter Stock -->
       <ion-col size="6">
         <ion-item lines="none" class="filter-item">
           <ion-label position="stacked">Stock</ion-label>
@@ -24,7 +22,6 @@
         </ion-item>
       </ion-col>
 
-      <!-- Filter / Urutan Harga -->
       <ion-col size="6">
         <ion-item lines="none" class="filter-item">
           <ion-label position="stacked">Urutkan Harga</ion-label>
@@ -70,7 +67,7 @@
             class="product-img"
           />
           <ion-card-content>
-            <h2 class="product-title" [routerLink]="['/produkdetail', i]">
+            <h2 class="product-title" [routerLink]="['/produkdetail', getProductIndex(item)]">
               {{ item.name | uppercase }}
             </h2>
           </ion-card-content>
