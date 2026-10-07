@@ -34,4 +34,11 @@ export class SettingsPage implements OnInit {
       .play();
   }
 
+  
+  onToggleDarkMode(event: any) {
+    this.isDarkMode = event.detail.checked;
+    document.body.classList.toggle('dark', this.isDarkMode);
+    localStorage.setItem('darkMode', this.isDarkMode.toString());
+  }
+
 }
