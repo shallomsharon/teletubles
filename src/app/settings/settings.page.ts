@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   standalone: false,
 })
 export class SettingsPage implements OnInit {
+  isDarkMode: boolean = false;
+  notificationsEnabled: boolean = true;
+  selectedLanguage: string = 'id';
 
   constructor() { }
 
